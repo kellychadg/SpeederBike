@@ -11,7 +11,9 @@ namespace SpeederBike
         public List<List<IGamePiece>> BackgroundComplete { get; set; } = new List<List<IGamePiece>>();
         Random randomSeed = new Random();
         PlayerPiece playerPiece = new PlayerPiece();
-        public int PlayerVerticalLocation { get; set; } = 4;
+
+        public int PlayerVerticalLocation { get; private set; } = 4;
+        public bool PlayerHasCollided { get; private set; } = false;
 
         public FieldOfPlay()
         {
@@ -21,7 +23,7 @@ namespace SpeederBike
 
                 if (i == 0 || i == 8)    // Walls
                 {
-                    for (int j = 0; j < 10; j++)
+                    for (int j = 0; j < 15; j++)
                     {
                         BackgroundComplete[i].Add(new Wall1());
                         BackgroundComplete[i].Add(new Wall1());
@@ -32,7 +34,7 @@ namespace SpeederBike
                 }
                 else
                 {
-                    for (int j = 0; j < 50; j++)   // Center Track
+                    for (int j = 0; j < 75; j++)   // Center Track
                     {
                         BackgroundComplete[i].Add(new BlankSpace());
                     }
@@ -42,7 +44,7 @@ namespace SpeederBike
             DisplayPlayerLocation();
 
 
-        } // Constructor OH GOD REFACTOR THIS
+        } // Constructor 
 
         public void DisplayUpdatedGameVisual()
         {
@@ -94,16 +96,6 @@ namespace SpeederBike
             }
         }
 
-        public bool PlayerHasCollidedWithObject()
-        {
-            if (true)           //figure out how to check for impact here
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public void MoveBackgroundLeftOneUnit()
         {
             MoveBackgroundWallsLeftOneUnit();
@@ -133,6 +125,11 @@ namespace SpeederBike
                 }
                 else
                 {
+                    if (BackgroundComplete[i][1].CollidesWithPlayer)
+                    {
+                        PlayerHasCollided = true;
+                    }
+
                     BackgroundComplete[i].RemoveAt(1);
                     BackgroundComplete[i].Add(GetNewGamePiece());
                 }
