@@ -79,7 +79,7 @@ namespace SpeederBike
 
         public void MovePlayerPieceUp()
         {
-            if (PlayerVerticalLocation > 0)
+            if (PlayerVerticalLocation > 1)
             {
                 PlayerVerticalLocation -= 1;
             }
@@ -87,7 +87,7 @@ namespace SpeederBike
 
         public void MovePlayerPieceDown()
         {
-            if (PlayerVerticalLocation < 8)
+            if (PlayerVerticalLocation < 7)
             {
                 PlayerVerticalLocation += 1;
             }
