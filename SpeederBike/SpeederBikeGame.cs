@@ -21,11 +21,9 @@ namespace SpeederBike
 
                 fieldOfPlay.DisplayUpdatedGameVisual();
 
-                fieldOfPlay.MoveBackgroundLeftOneUnit();
-
                 CheckForKeyPress();
 
-                fieldOfPlay.MovePlayerPiece(PushedKey);
+                fieldOfPlay.MoveBackgroundLeftOneUnit();
 
                 CreateTimeDelayUntilNextFrame();
             }
@@ -34,7 +32,7 @@ namespace SpeederBike
 
         public void CreateTimeDelayUntilNextFrame()
         {
-            Thread.Sleep(150);
+            Thread.Sleep(400);
         }
 
         public void CheckForKeyPress()
@@ -43,6 +41,8 @@ namespace SpeederBike
             {
                 PushedKey = Console.ReadKey(true).KeyChar.ToString();
             }
+
+            fieldOfPlay.MovePlayerPiece(PushedKey);
         }
 
     }

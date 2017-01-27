@@ -62,7 +62,6 @@ namespace SpeederBike
         public void DisplayPlayerLocation()
         {
             BackgroundComplete[PlayerVerticalLocation][0] = playerPiece;
-            Console.Write(BackgroundComplete[PlayerVerticalLocation][0].Symbol);
         }
 
         public void MovePlayerPiece(string pushedKey)
@@ -75,6 +74,8 @@ namespace SpeederBike
             {
                 MovePlayerPieceDown();
             }
+
+            DisplayPlayerLocation();
         }
 
         public void MovePlayerPieceUp()
@@ -92,7 +93,7 @@ namespace SpeederBike
                 PlayerVerticalLocation += 1;
             }
         }
-        
+
         public bool PlayerHasCollidedWithObject()
         {
             if (true)           //figure out how to check for impact here
