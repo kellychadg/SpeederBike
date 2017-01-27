@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace SpeederBike
 {
-    class Background
+    class FieldOfPlay
     {
         public List<List<IGamePiece>> BackgroundComplete { get; set; } = new List<List<IGamePiece>>();
         Random randomSeed = new Random();
+        PlayerPiece playerPiece = new PlayerPiece();
+        public int PlayerVerticalLocation { get; set; } = 4;
 
-        public Background()
+        public FieldOfPlay()
         {
             for (int i = 0; i < 9; i++)
             {
                 BackgroundComplete.Add(new List<IGamePiece>());
 
-                if(i == 0 || i == 8)    // Walls
+                if (i == 0 || i == 8)    // Walls
                 {
                     for (int j = 0; j < 10; j++)
                     {
@@ -37,15 +39,18 @@ namespace SpeederBike
                 }
             }
 
+            DisplayPlayerLocation();
+
 
         } // Constructor OH GOD REFACTOR THIS
 
-        public void DisplayBackground()
+        public void DisplayUpdatedGameVisual()
         {
             Console.Clear();
-            
+
             for (int i = 0; i < BackgroundComplete.Count; i++)
             {
+                Console.Write(" ");
                 for (int j = 0; j < BackgroundComplete[i].Count; j++)
                 {
                     Console.Write(BackgroundComplete[i][j].Symbol);
@@ -56,9 +61,38 @@ namespace SpeederBike
 
         public void DisplayPlayerLocation()
         {
-
+            BackgroundComplete[PlayerVerticalLocation][0] = playerPiece;
+            Console.Write(BackgroundComplete[PlayerVerticalLocation][0].Symbol);
         }
 
+        public void MovePlayerPiece(string pushedKey)
+        {
+            if (pushedKey == "w")
+            {
+                MovePlayerPieceUp();
+            }
+            else if (pushedKey == "s")
+            {
+                MovePlayerPieceDown();
+            }
+        }
+
+        public void MovePlayerPieceUp()
+        {
+            if (PlayerVerticalLocation > 0)
+            {
+                PlayerVerticalLocation -= 1;
+            }
+        }
+
+        public void MovePlayerPieceDown()
+        {
+            if (PlayerVerticalLocation < 8)
+            {
+                PlayerVerticalLocation += 1;
+            }
+        }
+        
         public bool PlayerHasCollidedWithObject()
         {
             if (true)           //figure out how to check for impact here
@@ -91,8 +125,17 @@ namespace SpeederBike
         {
             for (int i = 1; i < BackgroundComplete.Count - 1; i++)
             {
-                BackgroundComplete[i].RemoveAt(0);
-                BackgroundComplete[i].Add(GetNewGamePiece());
+                if (i != PlayerVerticalLocation)
+                {
+                    BackgroundComplete[i].RemoveAt(0);
+                    BackgroundComplete[i].Add(GetNewGamePiece());
+                }
+                else
+                {
+                    BackgroundComplete[i].RemoveAt(1);
+                    BackgroundComplete[i].Add(GetNewGamePiece());
+                }
+
             }
         }
 

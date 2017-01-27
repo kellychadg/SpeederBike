@@ -9,8 +9,8 @@ namespace SpeederBike
 {
     class SpeederBikeGame
     {
-        Background background = new Background();
-
+        FieldOfPlay fieldOfPlay = new FieldOfPlay();
+        string PushedKey { get; set; } = string.Empty;
 
         public void StartGame()
         {
@@ -19,19 +19,30 @@ namespace SpeederBike
             {
                 Console.CursorVisible = false;
 
-                background.DisplayBackground();
+                fieldOfPlay.DisplayUpdatedGameVisual();
 
-                background.MoveBackgroundLeftOneUnit();
+                fieldOfPlay.MoveBackgroundLeftOneUnit();
+
+                CheckForKeyPress();
+
+                fieldOfPlay.MovePlayerPiece(PushedKey);
 
                 CreateTimeDelayUntilNextFrame();
             }
 
-            // GameOver();
         }
 
         public void CreateTimeDelayUntilNextFrame()
         {
-            Thread.Sleep(250);
+            Thread.Sleep(150);
+        }
+
+        public void CheckForKeyPress()
+        {
+            if (Console.KeyAvailable)
+            {
+                PushedKey = Console.ReadKey(true).KeyChar.ToString();
+            }
         }
 
     }
