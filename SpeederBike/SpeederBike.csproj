@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="SpeederBikeGame.cs" />
+    <Compile Include="Wall2.cs" />
+    <Compile Include="Wall1.cs" />
     <Compile Include="IGamePiece.cs" />
     <Compile Include="BlankSpace.cs" />
     <Compile Include="Obstacle.cs" />
