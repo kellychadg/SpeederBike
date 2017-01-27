@@ -9,6 +9,7 @@ namespace SpeederBike
     class Background
     {
         public List<List<IGamePiece>> BackgroundComplete { get; set; } = new List<List<IGamePiece>>();
+        Random randomSeed = new Random();
 
         public Background()
         {
@@ -18,7 +19,7 @@ namespace SpeederBike
 
                 if(i == 0 || i == 8)    // Walls
                 {
-                    for (int j = 0; j < 20; j++)
+                    for (int j = 0; j < 10; j++)
                     {
                         BackgroundComplete[i].Add(new Wall1());
                         BackgroundComplete[i].Add(new Wall1());
@@ -29,7 +30,7 @@ namespace SpeederBike
                 }
                 else
                 {
-                    for (int j = 0; j < 100; j++)   // Center Track
+                    for (int j = 0; j < 50; j++)   // Center Track
                     {
                         BackgroundComplete[i].Add(new BlankSpace());
                     }
@@ -42,7 +43,7 @@ namespace SpeederBike
         public void DisplayBackground()
         {
             Console.Clear();
-
+            
             for (int i = 0; i < BackgroundComplete.Count; i++)
             {
                 for (int j = 0; j < BackgroundComplete[i].Count; j++)
@@ -53,7 +54,20 @@ namespace SpeederBike
             }
         }
 
+        public void DisplayPlayerLocation()
+        {
 
+        }
+
+        public bool PlayerHasCollidedWithObject()
+        {
+            if (true)           //figure out how to check for impact here
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         public void MoveBackgroundLeftOneUnit()
         {
@@ -84,7 +98,13 @@ namespace SpeederBike
 
         public IGamePiece GetNewGamePiece()
         {
-            return new Obstacle(); // Dummy, add result of choosing a random object or empty space
+            int whatBackgroundObjectToSpawn = randomSeed.Next(0, 20);
+
+            if (whatBackgroundObjectToSpawn < 19)
+            {
+                return new BlankSpace();
+            }
+            return new Obstacle();
         }
 
     }

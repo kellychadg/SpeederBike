@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SpeederBike
@@ -10,23 +11,27 @@ namespace SpeederBike
     {
         Background background = new Background();
 
+
         public void StartGame()
         {
-            // DisplayIntro();
-            // SetAvailableLettersToGuessToDefault();
-            // SetSecretWord();
 
             while (true)
             {
+                Console.CursorVisible = false;
+
                 background.DisplayBackground();
 
                 background.MoveBackgroundLeftOneUnit();
 
-
-                Console.ReadLine();
+                CreateTimeDelayUntilNextFrame();
             }
 
             // GameOver();
+        }
+
+        public void CreateTimeDelayUntilNextFrame()
+        {
+            Thread.Sleep(250);
         }
 
     }
