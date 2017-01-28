@@ -139,12 +139,17 @@ namespace SpeederBike
 
         public IGamePiece GetNewGamePiece()
         {
-            int whatBackgroundObjectToSpawn = randomSeed.Next(0, 20);
+            int whatBackgroundObjectToSpawn = randomSeed.Next(0, 40);
 
-            if (whatBackgroundObjectToSpawn < 19)
+            if (whatBackgroundObjectToSpawn < 38)
             {
                 return new BlankSpace();
             }
+            else if (whatBackgroundObjectToSpawn == 39)
+            {
+                return new Obstacle2();
+            }
+
             return new Obstacle();
         }
 

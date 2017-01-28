@@ -37,6 +37,7 @@ namespace SpeederBike
 
                 CheckForGameOver();
             }
+
             GameOverScreen();
         }
 

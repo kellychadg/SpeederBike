@@ -14,9 +14,6 @@ namespace SpeederBike
             SpeederBikeGame speederBikeGame = new SpeederBikeGame();
 
             speederBikeGame.StartGame();
-
-
-            Console.ReadLine();
         }
     }
 }
