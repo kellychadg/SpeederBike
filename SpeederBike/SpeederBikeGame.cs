@@ -18,7 +18,8 @@ namespace SpeederBike
             IntroScreen();
 
             Console.CursorVisible = false;
-            
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+
             while (!GameIsOver)
             {
                 fieldOfPlay.DisplayUpdatedGameVisual();
@@ -65,7 +66,7 @@ namespace SpeederBike
             {
                 sleepTime = 20;
             }
-            
+
             Thread.Sleep(sleepTime);
         }
 
@@ -97,7 +98,7 @@ namespace SpeederBike
 
         public void DisplaySpeedAndDistance()
         {
-            string speed = ((GameDistanceCounter - (GameDistanceCounter % 50))+50).ToString();
+            string speed = ((GameDistanceCounter - (GameDistanceCounter % 50)) + 50).ToString();
 
             Console.WriteLine($"         [SPEED]: {speed} KPH");
             Console.WriteLine($"      [DISTANCE]: {GameDistanceCounter} Meters");
@@ -120,7 +121,7 @@ namespace SpeederBike
             Console.Clear();
             Console.WriteLine(" '.  \\ | /  ,' ");
             Console.WriteLine("   `. `.' ,' ");
-            Console.WriteLine(" (, .`.|, ' .)        G A M E   O V E R   M A N");     
+            Console.WriteLine(" (, .`.|, ' .)        G A M E   O V E R   M A N");
             Console.WriteLine("   - ~-0 - ~ -");
             Console.WriteLine(" (, '|'.` )',)            G A M E   O V E R");
             Console.WriteLine("   .' .'. '.  ");
