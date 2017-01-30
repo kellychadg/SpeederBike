@@ -42,9 +42,8 @@ namespace SpeederBike
             }
 
             DisplayPlayerLocation();
-
-
         } // Constructor 
+
 
         public void DisplayUpdatedGameVisual()
         {
@@ -65,6 +64,7 @@ namespace SpeederBike
         {
             BackgroundComplete[PlayerVerticalLocation][0] = playerPiece;
         }
+
 
         public void MovePlayerPiece(string pushedKey)
         {
@@ -96,6 +96,7 @@ namespace SpeederBike
             }
         }
 
+
         public void MoveBackgroundLeftOneUnit()
         {
             MoveBackgroundWallsLeftOneUnit();
@@ -104,12 +105,20 @@ namespace SpeederBike
 
         public void MoveBackgroundWallsLeftOneUnit()
         {
-            int topRow = 0;
-            int bottomRow = BackgroundComplete.Count() - 1;
+            MoveTopBackgroundWallLeftOneUnit();
+            MoveBottomBackgroundWallLeftOneUnit();
+        }
 
+        public void MoveTopBackgroundWallLeftOneUnit()
+        {
+            int topRow = 0;
             BackgroundComplete[topRow].Add(BackgroundComplete[topRow][0]);
             BackgroundComplete[topRow].RemoveAt(0);
+        }
 
+        public void MoveBottomBackgroundWallLeftOneUnit()
+        {
+            int bottomRow = BackgroundComplete.Count() - 1;
             BackgroundComplete[bottomRow].Add(BackgroundComplete[bottomRow][0]);
             BackgroundComplete[bottomRow].RemoveAt(0);
         }
@@ -120,8 +129,7 @@ namespace SpeederBike
             {
                 if (i != PlayerVerticalLocation)
                 {
-                    BackgroundComplete[i].RemoveAt(0);
-                    BackgroundComplete[i].Add(GetNewGamePiece());
+                    MoveBackgroundNotPlayerRow(i);
                 }
                 else
                 {
@@ -129,27 +137,41 @@ namespace SpeederBike
                     {
                         PlayerHasCollided = true;
                     }
-
-                    BackgroundComplete[i].RemoveAt(1);
-                    BackgroundComplete[i].Add(GetNewGamePiece());
+                    MoveBackgroundPlayerRow(i);
                 }
-
             }
         }
 
+
+        public void MoveBackgroundPlayerRow(int i)
+        {
+            BackgroundComplete[i].RemoveAt(1);
+            BackgroundComplete[i].Add(GetNewGamePiece());
+        }
+
+        public void MoveBackgroundNotPlayerRow(int i)
+        {
+            BackgroundComplete[i].RemoveAt(0);
+            BackgroundComplete[i].Add(GetNewGamePiece());
+        }
+
+
         public IGamePiece GetNewGamePiece()
         {
-            int whatBackgroundObjectToSpawn = randomSeed.Next(0, 40);
+            int whatBackgroundObjectToSpawn = randomSeed.Next(0, 50);
 
-            if (whatBackgroundObjectToSpawn < 38)
+            if (whatBackgroundObjectToSpawn < 47)
             {
                 return new BlankSpace();
             }
-            else if (whatBackgroundObjectToSpawn == 39)
+            else if (whatBackgroundObjectToSpawn == 47)
             {
                 return new Obstacle2();
             }
-
+            else if (whatBackgroundObjectToSpawn == 48)
+            {
+                return new Obstacle3();
+            }
             return new Obstacle();
         }
 

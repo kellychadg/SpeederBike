@@ -119,7 +119,7 @@ namespace SpeederBike
         public void GameOverScreen()
         {
             Console.Clear();
-            Console.WriteLine(" '.  \\ | /  ,' ");
+            Console.WriteLine("\n '.  \\ | /  ,' ");
             Console.WriteLine("   `. `.' ,' ");
             Console.WriteLine(" (, .`.|, ' .)        G A M E   O V E R   M A N");
             Console.WriteLine("   - ~-0 - ~ -");
